@@ -136,7 +136,7 @@ df_clean.to_csv(output_path, index=False)
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/tyagi-4080/SCT_DA_2.git](https://github.com/tyagi-4080/SCT_DA_2.git)
+   git clone https://github.com/tyagi-4080/SCT_DA_2.git
    cd SCT_DA_2
    ```
 
