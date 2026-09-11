@@ -2,7 +2,6 @@
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 
@@ -10,14 +9,14 @@
 
 ## 📌 Project Overview
 
-The objective of this project is to perform rigorous data quality checks, clean raw enterprise sales data, validate business constraints, construct feature enhancements, and export a fully processed dataset ready for downstream analysis and business intelligence.
+The objective of this project is to clean and prepare the Global Superstore dataset by identifying missing values, checking duplicates, validating data types and values, cleaning text fields, creating a shipping-duration feature, and exporting the cleaned dataset for further analysis.
 
 ---
 
 ## 🛠️ Tools & Environment
 
 * **Language:** Python
-* **Data Processing:** Pandas, NumPy
+* **Data Processing:** Pandas
 * **Development Environment:** VS Code (Jupyter Notebook extension)
 * **Version Control:** GitHub
 
@@ -27,7 +26,7 @@ The objective of this project is to perform rigorous data quality checks, clean 
 
 * **Source Dataset:** Global Superstore
 * **Initial Dimensions:** 51,290 rows × 24 columns
-* **Scope:** Global transaction logs spanning 147 countries across 7 core categories (Orders, Customers, Products, Categories, Locations, Financials, Shipping).
+* **Scope:** Global sales transaction data covering 147 countries.
 
 ---
 
@@ -53,7 +52,7 @@ SCT_DA_2/
 
 ## 🔄 Data Analytics Workflow
 
-Raw Dataset (Global Superstore) ──► Ingestion & Audit ──► Missing Value Elimination ──► Financial Integrity Check ──► Date Logic & Feature Engineering ──► Cleaned CSV Export
+Raw Dataset (Global Superstore) ──► Ingestion & Audit ──► Missing Value Analysis & Handling ──► Numerical Data Validation ──► Date Logic & Feature Engineering ──► Cleaned CSV Export
 
 ---
 
@@ -63,7 +62,7 @@ Raw Dataset (Global Superstore) ──► Ingestion & Audit ──► Missing Va
 * Loaded `Global Superstore.xls` using `pd.read_excel()` into a Pandas DataFrame.
 * Audited dimensions via `df.shape` (51,290 rows × 24 columns) and inspected core features using `df.columns`.
 
-### 2. Missing Value Analysis & Feature Elimination
+### 2. Missing Value Analysis & Handling
 * Performed missing value checks (`df.isnull().sum()`) and identified 41,296 missing entries in the `Postal Code` column (~80.5% missing rate).
 * Further market-level investigation (`df[df['Postal Code'].isnull()]['Market'].value_counts()`) confirmed non-missing postal code entries were restricted primarily to US records.
 * **Cleaning Decision:** Dropped `Postal Code` completely (`df_clean.drop(columns=['Postal Code'])`) to prevent artificial or misleading imputations.
@@ -76,7 +75,7 @@ df_clean = df.drop(columns=['Postal Code'])
 ### 3. Duplicate Record Check
 * Verified dataset uniqueness using `df_clean.duplicated().sum()`. Identified **0 duplicate rows**.
 
-### 4. Financial & Quantity Integrity Validation
+### 4. Numerical Data Validation
 * Validated core numerical fields (`Sales`, `Quantity`, `Discount`, `Profit`, `Shipping Cost`) using statistical summaries (`.describe()`) and logical constraint checks:
   * `Sales <= 0` ➔ 0 invalid records.
   * `Quantity <= 0` ➔ 0 invalid records.
